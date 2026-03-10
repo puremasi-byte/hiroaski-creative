@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiroaki Creative | 三重県のWeb制作</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f9ff;
+    --bg2: #eef1ff;
+    --surface: #ffffff;
+    --border: #e2e5f5;
+    --accent: #3b5bdb;
+    --accent2: #5c7cfa;
+    --accent3: #74c0fc;
+    --green: #40c057;
+    --text: #1a1d2e;
+    --muted: #868e96;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(248,249,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: 'Outfit', sans-serif;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent) !important;
+    color: white !important;
+    padding: 0.5rem 1.4rem !important;
+    border-radius: 100px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--accent2) !important; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blob1 {
+    position: absolute; top: -10%; right: -5%;
+    width: 650px; height: 650px;
+    background: radial-gradient(circle at 60% 40%, #dbe4ff 0%, #eef2ff 45%, transparent 70%);
+    border-radius: 50%; pointer-events: none; z-index: 0;
+  }
+  .blob2 {
+    position: absolute; bottom: -5%; left: -5%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, #e3fafc 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none; z-index: 0;
+  }
+
+  .hero-left { position: relative; z-index: 1; animation: fadeUp 0.9s ease both; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: #dbe4ff; color: var(--accent);
+    font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 600;
+    padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 2rem; letter-spacing: 0.04em;
+  }
+
+  h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 700; line-height: 1.15; letter-spacing: -0.03em;
+    color: var(--text); margin-bottom: 1.5rem;
+  }
+
+  h1 .hl {
+    color: var(--accent);
+    position: relative; display: inline-block;
+  }
+  h1 .hl::after {
+    content: '';
+    position: absolute; bottom: 4px; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #74c0fc, #5c7cfa);
+    border-radius: 3px; opacity: 0.4;
+  }
+
+  .hero-sub {
+    font-size: 1rem; color: var(--muted);
+    max-width: 460px; margin-bottom: 2.5rem; line-height: 2;
+  }
+
+  .hero-cta { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    padding: 0.9rem 2.2rem;
+    background: var(--accent); color: white;
+    border: none; border-radius: 100px;
+    font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(59,91,219,0.3);
+  }
+  .btn-primary:hover {
+    background: var(--accent2); transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(59,91,219,0.4);
+  }
+
+  .btn-ghost {
+    color: var(--text); text-decoration: none;
+    font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 500;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s, gap 0.2s;
+  }
+  .btn-ghost:hover { color: var(--accent); gap: 0.7rem; }
+
+  /* Hero right cards */
+  .hero-right {
+    position: relative; z-index: 1; height: 480px;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  .hcard {
+    position: absolute; background: white; border-radius: 20px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 8px 40px rgba(59,91,219,0.1);
+    border: 1px solid var(--border);
+  }
+
+  .hcard.main {
+    top: 20px; left: 0; right: 40px; bottom: 140px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .card-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 14px; display: flex; align-items: center;
+    justify-content: center; font-size: 1.4rem; margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--text); margin-bottom: 0.4rem;
+  }
+  .card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+  .hcard.stat {
+    bottom: 0; right: 0; left: 100px;
+    padding: 1.2rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  .stat-num {
+    font-family: 'Outfit', sans-serif; font-size: 1.8rem;
+    font-weight: 700; color: var(--accent); line-height: 1;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+
+  .hcard.tech {
+    top: 0; right: 0; left: auto; bottom: auto;
+    padding: 1rem 1.4rem;
+    animation: float 4s 1.5s ease-in-out infinite;
+  }
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tech-tag {
+    font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 500;
+    padding: 0.25rem 0.7rem; border-radius: 100px;
+    background: var(--bg2); color: var(--accent); border: 1px solid var(--border);
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+
+  .stag {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif; font-size: 0.75rem; font-weight: 600;
+    color: var(--accent); background: #dbe4ff;
+    padding: 0.3rem 0.9rem; border-radius: 100px;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; color: var(--text);
+    line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1rem;
+  }
+
+  .lead {
+    font-size: 1rem; color: var(--muted);
+    max-width: 500px; line-height: 2; margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about { background: white; }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; max-width: 1100px;
+  }
+
+  .about-features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+  }
+
+  .feat {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .feat:hover { border-color: var(--accent2); transform: translateY(-2px); }
+  .feat-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+  .feat-name {
+    font-family: 'Outfit', sans-serif; font-size: 0.85rem;
+    font-weight: 600; color: var(--text);
+  }
+
+  .about-box {
+    background: linear-gradient(135deg, #dbe4ff, #e3fafc);
+    border-radius: 24px; padding: 2.5rem; margin-bottom: 1rem;
+  }
+  .about-box h3 {
+    font-family: 'Outfit', sans-serif; font-size: 1rem;
+    font-weight: 700; color: var(--text); margin-bottom: 1rem;
+  }
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-pill {
+    font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 500;
+    padding: 0.35rem 0.9rem; border-radius: 100px;
+    background: white; color: var(--accent); border: 1px solid var(--border);
+  }
+
+  .stat-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-box {
+    background: white; border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.2rem; text-align: center;
+  }
+  .stat-box .big { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .stat-box .small { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; }
+
+  /* WORKS */
+  .works { background: var(--bg); }
+  .works-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; max-width: 1100px;
+  }
+
+  .work-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 20px; padding: 2.5rem;
+    transition: box-shadow 0.25s, transform 0.25s; cursor: pointer;
+  }
+  .work-card:hover { box-shadow: 0 12px 50px rgba(59,91,219,0.12); transform: translateY(-4px); }
+
+  .work-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+  .work-emoji {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #dbe4ff, #e3fafc);
+    border-radius: 16px; display: flex; align-items: center;
+    justify-content: center; font-size: 1.6rem;
+  }
+  .work-year { font-family: 'Outfit', sans-serif; font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+  .work-title { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .work-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
+  .work-desc { font-size: 0.85rem; color: #495057; line-height: 1.9; margin-bottom: 1.5rem; }
+  .work-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .work-tag {
+    font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 500;
+    padding: 0.25rem 0.75rem; border-radius: 100px;
+    background: #dbe4ff; color: var(--accent);
+  }
+
+  .work-card.next {
+    border-style: dashed; border-color: #c5cbfa; background: #f8f9ff;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; gap: 1rem;
+  }
+  .next-icon {
+    width: 64px; height: 64px; background: #dbe4ff;
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 1.8rem;
+  }
+  .next-t { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent); }
+  .next-s { font-size: 0.82rem; color: var(--muted); }
+
+  /* SERVICES */
+  .services { background: white; }
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; }
+
+  .plan {
+    background: var(--bg); border: 2px solid var(--border);
+    border-radius: 24px; padding: 2.5rem;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .plan:hover { border-color: var(--accent2); transform: translateY(-4px); }
+
+  .plan.featured {
+    background: linear-gradient(160deg, #dbe4ff 0%, #eef2ff 100%);
+    border-color: var(--accent);
+  }
+
+  .plan-badge {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700;
+    background: var(--accent); color: white;
+    padding: 0.3rem 0.9rem; border-radius: 100px;
+    letter-spacing: 0.08em; margin-bottom: 1.5rem;
+  }
+  .plan-name { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+  .plan-price { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .plan-note { font-size: 0.78rem; color: var(--muted); margin-bottom: 2rem; }
+  .divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .plan-features li {
+    font-size: 0.85rem; color: #495057;
+    display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.6;
+  }
+  .plan-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; font-family: 'Outfit', sans-serif; }
+
+  .seo-box {
+    margin-top: 1.5rem; background: white;
+    border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem;
+  }
+  .seo-title {
+    font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 700;
+    color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .seo-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .seo-list li { font-size: 0.78rem; color: #495057; display: flex; align-items: center; gap: 0.5rem; }
+  .seo-list li::before { content: '🔍'; font-size: 0.7rem; }
+
+  .plans-note { margin-top: 1.5rem; font-size: 0.78rem; color: var(--muted); max-width: 1100px; }
+
+  /* FLOW */
+  .flow { background: var(--bg); }
+  .flow-steps {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 1rem; max-width: 1100px;
+  }
+
+  .flow-step {
+    background: white; border: 1px solid var(--border);
+    border-radius: 20px; padding: 2rem 1.4rem; text-align: center;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .flow-step:hover { box-shadow: 0 8px 30px rgba(59,91,219,0.1); transform: translateY(-4px); }
+
+  .flow-circle {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700;
+    color: white; margin: 0 auto 1rem;
+  }
+  .flow-name { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+  .flow-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.8; }
+  .flow-note {
+    margin-top: 0.8rem; font-size: 0.68rem; color: var(--accent);
+    background: #dbe4ff; padding: 0.3rem 0.6rem; border-radius: 8px; line-height: 1.5;
+  }
+
+  /* CONTACT */
+  .contact { background: white; }
+  .contact-inner { max-width: 680px; margin: 0 auto; }
+
+  .contact-form {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 24px; padding: 2.5rem;
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+
+  .form-group label {
+    display: block; font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%; background: white;
+    border: 1.5px solid var(--border); border-radius: 12px;
+    color: var(--text); padding: 0.85rem 1.1rem;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s; appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,91,219,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 130px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .submit-btn {
+    width: 100%; padding: 1rem;
+    background: var(--accent); color: white; border: none; border-radius: 14px;
+    font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(59,91,219,0.25); margin-top: 0.5rem;
+  }
+  .submit-btn:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,91,219,0.35); }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 4rem; border-top: 1px solid var(--border); background: var(--bg);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text); }
+  .footer-logo span { color: var(--accent); }
+  .footer-copy { font-family: 'Outfit', sans-serif; font-size: 0.75rem; color: var(--muted); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+    .hero-right { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .works-grid { grid-template-columns: 1fr; }
+    .plans { grid-template-columns: 1fr; }
+    .flow-steps { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Hiroaki<span>.</span>Creative</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#flow">Flow</a></li>
+    <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="hero-left">
+    <div class="hero-badge">📍 三重県鈴鹿市 · Web制作</div>
+    <h1>地域のお店に、<br><span class="hl">本物の</span>Web体験を。</h1>
+    <p class="hero-sub">中小店舗・個人事業主向けのホームページ制作を行っています。集客につながる、本格的なWebサイトを丁寧に。</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">無料で相談する</a>
+      <a href="#works" class="btn-ghost">制作実績を見る →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hcard main">
+      <div class="card-icon">🌐</div>
+      <div class="card-title">フルスクラッチ開発</div>
+      <p class="card-desc">テンプレート不使用。お店の個性に合わせたオリジナルサイトを一から制作します。</p>
+    </div>
+    <div class="hcard stat">
+      <div><div class="stat-num">∞</div></div>
+      <div class="stat-label">丁寧な対応<br>打ち合わせから<br>納品まで一貫</div>
+    </div>
+    <div class="hcard tech">
+      <div class="tech-tags">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JS</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">SEO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid reveal">
+    <div>
+      <div class="stag">About</div>
+      <h2>地元に根ざした<br>Web制作を。</h2>
+      <p style="color:var(--muted);line-height:2;margin-bottom:1rem;">デザインテンプレートに頼らず、お客様のお店・サービスに合わせたフルスクラッチ開発が得意です。老舗はんこ専門店「太古堂」様をはじめ、地域の事業者様のWeb集客を支援しています。</p>
+      <p style="color:var(--muted);line-height:2;">打ち合わせから納品・保守まで、一貫して弘明が対応します。大手制作会社では難しい、細かなご要望にも柔軟に対応可能です。</p>
+      <div class="about-features">
+        <div class="feat"><div class="feat-icon">🎨</div><div class="feat-name">オリジナルデザイン</div></div>
+        <div class="feat"><div class="feat-icon">📱</div><div class="feat-name">スマホ完全対応</div></div>
+        <div class="feat"><div class="feat-icon">🔍</div><div class="feat-name">SEO対策込み</div></div>
+        <div class="feat"><div class="feat-icon">🛠️</div><div class="feat-name">納品後もサポート</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="about-box">
+        <h3>使用技術</h3>
+        <div class="skills-wrap">
+          <span class="skill-pill">HTML / CSS</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">PHP</span>
+          <span class="skill-pill">MySQL</span>
+          <span class="skill-pill">SEO</span>
+          <span class="skill-pill">レスポンシブ</span>
+          <span class="skill-pill">Instagram API</span>
+          <span class="skill-pill">フォーム実装</span>
+        </div>
+      </div>
+      <div class="stat-boxes">
+        <div class="stat-box"><div class="big">1+</div><div class="small">制作実績</div></div>
+        <div class="stat-box"><div class="big">無料</div><div class="small">ご相談・お見積り</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="works" id="works">
+  <div class="stag">Works</div>
+  <h2>制作実績</h2>
+  <p class="lead">実際に制作したサイトをご紹介します。</p>
+  <div class="works-grid reveal">
+    <div class="work-card">
+      <div class="work-top">
+        <div class="work-emoji">🖋️</div>
+        <div class="work-year">2024</div>
+      </div>
+      <div class="work-title">太古堂</div>
+      <div class="work-sub">老舗はんこ・印鑑専門店 / 四日市市</div>
+      <p class="work-desc">創業50年以上の老舗専門店のコーポレートサイトをフルスクラッチで制作。商品紹介・ブログ・管理パネル・Instagram連携など多機能サイトを実現しました。</p>
+      <div class="work-tags">
+        <span class="work-tag">HTML/CSS/JS</span>
+        <span class="work-tag">PHP</span>
+        <span class="work-tag">MySQL</span>
+        <span class="work-tag">管理パネル</span>
+        <span class="work-tag">Instagram API</span>
+      </div>
+    </div>
+    <div class="work-card next">
+      <div class="next-icon">✨</div>
+      <div class="next-t">Next Work</div>
+      <div class="next-s">あなたのお店が<br>ここに掲載されます</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="stag">Services</div>
+  <h2>料金・サービス</h2>
+  <p class="lead">ご要件に合わせて3つのプランをご用意しています。</p>
+  <div class="plans reveal">
+    <div class="plan">
+      <div class="plan-name">Light</div>
+      <div class="plan-price">¥50,000</div>
+      <div class="plan-note">〜（税込）</div>
+      <div class="divider"></div>
+      <ul class="plan-features">
+        <li>静的サイト〜5ページ</li>
+        <li>レスポンシブ対応（スマートフォン最適化）</li>
+        <li>お問い合わせフォーム</li>
+        <li>基本的なmeta設定</li>
+        <li>納品後1ヶ月サポート</li>
+      </ul>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">RECOMMENDED</div>
+      <div class="plan-name">Standard</div>
+      <div class="plan-price">¥100,000</div>
+      <div class="plan-note">〜（税込）</div>
+      <div class="divider"></div>
+      <ul class="plan-features">
+        <li>ページ数制限なし</li>
+        <li>ブログ・お知らせ機能</li>
+        <li>お問い合わせフォーム（スパム対策付き）</li>
+        <li>レスポンシブ対応</li>
+        <li>納品後3ヶ月サポート</li>
+      </ul>
+      <div class="seo-box">
+        <div class="seo-title">SEO対策 5点セット込み</div>
+        <ul class="seo-list">
+          <li>metaタグ最適化（title・description）</li>
+          <li>構造化データ（Schema.org）</li>
+          <li>見出し・キーワード配置設計</li>
+          <li>Googleビジネスプロフィール登録サポート</li>
+          <li>表示速度改善（画像圧縮など）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Maintenance</div>
+      <div class="plan-price">¥5,000</div>
+      <div class="plan-note">〜/月（税込）</div>
+      <div class="divider"></div>
+      <ul class="plan-features">
+        <li>テキスト・画像の更新作業</li>
+        <li>セキュリティ確認</li>
+        <li>バックアップ管理</li>
+        <li>簡単な機能追加・修正</li>
+        <li>メール・電話サポート</li>
+      </ul>
+    </div>
+  </div>
+  <p class="plans-note">※ 上記はすべて目安価格です。ご要件によって変動します。まずはお気軽にご相談ください。</p>
+</section>
+
+<!-- FLOW -->
+<section class="flow" id="flow">
+  <div class="stag">Flow</div>
+  <h2>制作の流れ</h2>
+  <p class="lead">ご相談から公開まで、5つのステップで丁寧に進めます。</p>
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-circle">01</div>
+      <div class="flow-name">ヒアリング</div>
+      <p class="flow-desc">オンラインまたは対面でご要望をお伺いします。業種・目的・ご予算などをお聞かせください。</p>
+      <div class="flow-note">相談・お見積りは無料</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">02</div>
+      <div class="flow-name">ご提案・契約</div>
+      <p class="flow-desc">サイト構成・デザイン方向性・料金をご提案します。サーバー・ドメインのご案内も行います。</p>
+      <div class="flow-note">サーバーはお客様名義で契約</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">03</div>
+      <div class="flow-name">制作・確認</div>
+      <p class="flow-desc">デザイン・コーディングを進めます。途中段階でご確認いただきながら完成度を高めます。</p>
+      <div class="flow-note">修正は2回まで無料</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">04</div>
+      <div class="flow-name">納品・公開</div>
+      <p class="flow-desc">サーバーへのアップロード・動作確認を行い公開します。Google登録サポートも対応します。</p>
+      <div class="flow-note">公開後1ヶ月は無償サポート</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">05</div>
+      <div class="flow-name">保守・サポート</div>
+      <p class="flow-desc">公開後の更新作業・トラブル対応は保守契約で継続サポートします。</p>
+      <div class="flow-note">月額5,000円〜の保守プランあり</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="stag" style="display:block;text-align:center;margin:0 auto 1rem;">Contact</div>
+    <h2 style="text-align:center;">お問い合わせ</h2>
+    <p class="lead" style="text-align:center;margin:0 auto 2rem;">ホームページ制作のご相談・お見積りは無料です。<br>お気軽にお問い合わせください。</p>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>お名前 *</label>
+          <input type="text" placeholder="山田 太郎" required>
+        </div>
+        <div class="form-group">
+          <label>会社名・店舗名</label>
+          <input type="text" placeholder="〇〇商店">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>メールアドレス *</label>
+        <input type="email" placeholder="example@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>ご相談の種類</label>
+        <select>
+          <option value="">選択してください</option>
+          <option>新規サイト制作（ライト）</option>
+          <option>新規サイト制作（スタンダード）</option>
+          <option>既存サイトのリニューアル</option>
+          <option>保守・更新サポート</option>
+          <option>その他・まずは相談したい</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>メッセージ *</label>
+        <textarea placeholder="ご要望・ご質問をお気軽にどうぞ。&#10;例：飲食店のホームページを作りたい、予約フォームも欲しいです。" required></textarea>
+      </div>
+      <input type="text" name="_gotcha" style="display:none;">
+      <button type="submit" class="submit-btn">送信する →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Hiroaki<span>.</span>Creative</div>
+  <div class="footer-copy">© 2025 Hiroaki Creative. All rights reserved.</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => obs.observe(r));
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.submit-btn');
+    btn.textContent = '送信しました ✓';
+    btn.style.background = '#40c057';
+    setTimeout(() => { btn.textContent = '送信する →'; btn.style.background = ''; e.target.reset(); }, 3000);
+  }
+</script>
+</body>
+</html>
