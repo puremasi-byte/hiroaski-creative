@@ -327,52 +327,38 @@
 
   /* SERVICES */
   .services { background: white; }
-  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; }
-
-  .plan {
-    background: var(--bg); border: 2px solid var(--border);
-    border-radius: 24px; padding: 2.5rem;
-    transition: border-color 0.25s, transform 0.25s;
-  }
-  .plan:hover { border-color: var(--accent2); transform: translateY(-4px); }
-
-  .plan.featured {
-    background: linear-gradient(160deg, #dbe4ff 0%, #eef2ff 100%);
-    border-color: var(--accent);
-  }
-
-  .plan-badge {
-    display: inline-block;
-    font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700;
-    background: var(--accent); color: white;
-    padding: 0.3rem 0.9rem; border-radius: 100px;
-    letter-spacing: 0.08em; margin-bottom: 1.5rem;
-  }
-  .plan-name { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
-  .plan-price { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
-  .plan-note { font-size: 0.78rem; color: var(--muted); margin-bottom: 2rem; }
-  .divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
-
-  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-  .plan-features li {
-    font-size: 0.85rem; color: #495057;
-    display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.6;
-  }
-  .plan-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; font-family: 'Outfit', sans-serif; }
-
-  .seo-box {
-    margin-top: 1.5rem; background: white;
-    border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem;
-  }
-  .seo-title {
-    font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 700;
-    color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.8rem;
-  }
-  .seo-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-  .seo-list li { font-size: 0.78rem; color: #495057; display: flex; align-items: center; gap: 0.5rem; }
-  .seo-list li::before { content: '🔍'; font-size: 0.7rem; }
-
-  .plans-note { margin-top: 1.5rem; font-size: 0.78rem; color: var(--muted); max-width: 1100px; }
+  /* 基本料金ブロック */
+  .price-block { max-width: 1100px; background: linear-gradient(135deg, #dbe4ff 0%, #eef2ff 100%); border: 2px solid var(--accent); border-radius: 24px; overflow: hidden; margin-bottom: 3rem; }
+  .price-block-header { background: var(--accent); padding: 2rem 2.5rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .price-block-label { font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.15); padding: 0.3rem 0.9rem; border-radius: 100px; display: inline-block; }
+  .price-block-title { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: white; flex: 1; }
+  .price-block-price { font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 700; color: white; line-height: 1; }
+  .price-block-price span { font-size: 0.85rem; font-weight: 400; opacity: 0.8; margin-left: 0.3rem; }
+  .price-block-body { padding: 2rem 2.5rem; }
+  .price-block-desc { font-size: 0.9rem; color: #495057; margin-bottom: 1.2rem; }
+  .price-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+  .price-list li { font-size: 0.88rem; color: #343a40; display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.6; }
+  .price-check { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  /* オプション */
+  .options-wrap { max-width: 1100px; margin-bottom: 3rem; }
+  .options-header { margin-bottom: 1.5rem; }
+  .options-sub { font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; }
+  .options-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .opt-card { background: var(--bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 1.3rem; transition: border-color 0.2s, transform 0.2s; }
+  .opt-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+  .opt-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+  .opt-name { font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; line-height: 1.4; }
+  .opt-price { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+  .opt-price span { font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+  .opt-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+  /* 保守プラン */
+  .maintenance-wrap { max-width: 1100px; margin-bottom: 1.5rem; }
+  .maintenance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.2rem; }
+  .maint-card { background: var(--bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+  .maint-name { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+  .maint-price { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+  .maint-price span { font-size: 0.78rem; font-weight: 400; color: var(--muted); }
+  .plans-note { margin-top: 1.5rem; font-size: 0.78rem; color: var(--muted); max-width: 1100px; line-height: 1.8; }
 
   /* FLOW */
   .flow { background: var(--bg); }
@@ -469,7 +455,10 @@
     .hero-right { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .works-grid { grid-template-columns: 1fr; }
-    .plans { grid-template-columns: 1fr; }
+    .options-grid { grid-template-columns: repeat(2, 1fr); }
+    .maintenance-grid { grid-template-columns: 1fr; }
+    .price-list { grid-template-columns: 1fr; }
+    .price-block-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     .flow-steps { grid-template-columns: 1fr 1fr; }
     .form-row { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
@@ -596,60 +585,135 @@
 <section class="services" id="services">
   <div class="stag">Services</div>
   <h2>料金・サービス</h2>
-  <p class="lead">ご要件に合わせて3つのプランをご用意しています。</p>
-  <div class="plans reveal">
-    <div class="plan">
-      <div class="plan-name">Light</div>
-      <div class="plan-price">¥50,000</div>
-      <div class="plan-note">〜（税込）</div>
-      <div class="divider"></div>
-      <ul class="plan-features">
-        <li>静的サイト〜5ページ</li>
-        <li>レスポンシブ対応（スマートフォン最適化）</li>
-        <li>お問い合わせフォーム</li>
-        <li>基本的なmeta設定</li>
-        <li>納品後1ヶ月サポート</li>
-      </ul>
+  <p class="lead">基本料金＋必要な機能だけ追加。予算に合わせて柔軟にご対応します。</p>
+
+  <!-- 基本料金 -->
+  <div class="price-block reveal">
+    <div class="price-block-header">
+      <div class="price-block-label">BASE</div>
+      <div class="price-block-title">基本料金</div>
+      <div class="price-block-price">¥30,000<span>〜（税込）</span></div>
     </div>
-    <div class="plan featured">
-      <div class="plan-badge">RECOMMENDED</div>
-      <div class="plan-name">Standard</div>
-      <div class="plan-price">¥100,000</div>
-      <div class="plan-note">〜（税込）</div>
-      <div class="divider"></div>
-      <ul class="plan-features">
-        <li>ページ数制限なし</li>
-        <li>ブログ・お知らせ機能</li>
-        <li>お問い合わせフォーム（スパム対策付き）</li>
-        <li>レスポンシブ対応</li>
-        <li>納品後3ヶ月サポート</li>
-      </ul>
-      <div class="seo-box">
-        <div class="seo-title">SEO対策 5点セット込み</div>
-        <ul class="seo-list">
-          <li>metaタグ最適化（title・description）</li>
-          <li>構造化データ（Schema.org）</li>
-          <li>見出し・キーワード配置設計</li>
-          <li>Googleビジネスプロフィール登録サポート</li>
-          <li>表示速度改善（画像圧縮など）</li>
-        </ul>
-      </div>
-    </div>
-    <div class="plan">
-      <div class="plan-name">Maintenance</div>
-      <div class="plan-price">¥5,000</div>
-      <div class="plan-note">〜/月（税込）</div>
-      <div class="divider"></div>
-      <ul class="plan-features">
-        <li>テキスト・画像の更新作業</li>
-        <li>セキュリティ確認</li>
-        <li>バックアップ管理</li>
-        <li>簡単な機能追加・修正</li>
-        <li>メール・電話サポート</li>
+    <div class="price-block-body">
+      <p class="price-block-desc">どんなサイトにも必ず含まれる標準セットです。</p>
+      <ul class="price-list">
+        <li><span class="price-check">✓</span>デザイン・コーディング（〜3ページ）</li>
+        <li><span class="price-check">✓</span>スマートフォン対応（レスポンシブ）</li>
+        <li><span class="price-check">✓</span>SSL設定（https化）</li>
+        <li><span class="price-check">✓</span>サーバー・ドメイン設定サポート</li>
+        <li><span class="price-check">✓</span>基本SEO設定（metaタグ）</li>
+        <li><span class="price-check">✓</span>納品後1ヶ月サポート</li>
       </ul>
     </div>
   </div>
-  <p class="plans-note">※ 上記はすべて目安価格です。ご要件によって変動します。まずはお気軽にご相談ください。</p>
+
+  <!-- オプション -->
+  <div class="options-wrap reveal">
+    <div class="options-header">
+      <div class="price-block-label">OPTIONS</div>
+      <div class="price-block-title">オプション機能</div>
+      <p class="options-sub">必要な機能だけ追加できます。組み合わせ自由です。</p>
+    </div>
+    <div class="options-grid">
+      <div class="opt-card">
+        <div class="opt-icon">📄</div>
+        <div class="opt-name">ページ追加</div>
+        <div class="opt-price">+¥5,000<span>/ページ</span></div>
+        <div class="opt-desc">会社概要・サービス・アクセスなど</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">✉️</div>
+        <div class="opt-name">お問い合わせフォーム</div>
+        <div class="opt-price">+¥10,000</div>
+        <div class="opt-desc">スパム対策・自動返信メール付き</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">📝</div>
+        <div class="opt-name">ブログ・お知らせ機能</div>
+        <div class="opt-price">+¥15,000</div>
+        <div class="opt-desc">記事の投稿・カテゴリ管理</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">🖥️</div>
+        <div class="opt-name">管理画面</div>
+        <div class="opt-price">+¥20,000</div>
+        <div class="opt-desc">ご自身でテキスト・画像を更新可能</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">📸</div>
+        <div class="opt-name">Instagram連携</div>
+        <div class="opt-price">+¥10,000</div>
+        <div class="opt-desc">最新投稿をサイトに自動表示</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">🗺️</div>
+        <div class="opt-name">Google Map埋め込み</div>
+        <div class="opt-price">+¥5,000</div>
+        <div class="opt-desc">アクセスページにマップを設置</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">🕐</div>
+        <div class="opt-name">営業時間・定休日表示</div>
+        <div class="opt-price">+¥5,000</div>
+        <div class="opt-desc">本日の営業状況をリアルタイム表示</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">📊</div>
+        <div class="opt-name">アクセス解析設置</div>
+        <div class="opt-price">+¥5,000</div>
+        <div class="opt-desc">Google Analytics 4（GA4）導入</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">🔍</div>
+        <div class="opt-name">SEO対策5点セット</div>
+        <div class="opt-price">+¥15,000</div>
+        <div class="opt-desc">構造化データ・GBP登録・速度改善など</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">🛒</div>
+        <div class="opt-name">ネットショップ連携</div>
+        <div class="opt-price">+¥20,000</div>
+        <div class="opt-desc">BASE・STORESとの連携設置</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">🌐</div>
+        <div class="opt-name">多言語対応</div>
+        <div class="opt-price">+¥30,000〜</div>
+        <div class="opt-desc">英語・中国語など対応</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-icon">🎨</div>
+        <div class="opt-name">ロゴ・バナー制作</div>
+        <div class="opt-price">+¥15,000〜</div>
+        <div class="opt-desc">シンプルなロゴデザインを制作</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 保守プラン -->
+  <div class="maintenance-wrap reveal">
+    <div class="price-block-label">MAINTENANCE</div>
+    <div class="price-block-title">保守・管理プラン <span style="font-size:0.9rem;font-weight:400;color:var(--muted)">（月額）</span></div>
+    <div class="maintenance-grid">
+      <div class="maint-card">
+        <div class="maint-name">バックアップ管理</div>
+        <div class="maint-price">¥3,000<span>/月</span></div>
+        <div class="opt-desc">月次バックアップ・復元対応</div>
+      </div>
+      <div class="maint-card">
+        <div class="maint-name">更新代行</div>
+        <div class="maint-price">¥5,000<span>/月</span></div>
+        <div class="opt-desc">テキスト・画像の更新（月3回まで）</div>
+      </div>
+      <div class="maint-card">
+        <div class="maint-name">フルサポート</div>
+        <div class="maint-price">¥10,000<span>/月</span></div>
+        <div class="opt-desc">更新代行＋セキュリティ確認＋機能修正</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="plans-note">※ 上記はすべて目安価格です。ご要件によって変動します。まずはお気軽にご相談ください。<br>※ サーバー・ドメイン費用はお客様名義でのご契約となります（別途実費）。</p>
 </section>
 
 <!-- FLOW -->
