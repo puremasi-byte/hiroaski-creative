@@ -463,6 +463,23 @@
     .form-row { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
   }
+  /* オプションモーダル */
+  .opt-more { font-size: 0.75rem; color: var(--accent); margin-top: 0.8rem; font-weight: 600; opacity: 0; transition: opacity 0.2s; }
+  .opt-card:hover .opt-more { opacity: 1; }
+  .opt-card { cursor: pointer; }
+  .opt-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem; }
+  .opt-modal.active { display: flex; }
+  .opt-modal-box { background: white; border-radius: 24px; padding: 2.5rem; max-width: 520px; width: 100%; position: relative; animation: modalIn 0.25s ease; }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .opt-modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg); border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1rem; cursor: pointer; color: var(--muted); transition: background 0.2s; }
+  .opt-modal-close:hover { background: var(--border); }
+  .opt-modal-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+  .opt-modal-name { font-family: "Outfit", sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+  .opt-modal-price { font-family: "Outfit", sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--accent); margin-bottom: 1.5rem; }
+  .opt-modal-body { font-size: 0.9rem; color: #495057; line-height: 1.9; }
+  .opt-modal-body ul { padding-left: 1.2rem; margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .opt-modal-body li { color: #343a40; }
+  .opt-modal-tag { display: inline-block; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; font-size: 0.75rem; padding: 0.2rem 0.8rem; color: var(--muted); margin-bottom: 1rem; }
 </style>
 </head>
 <body>
@@ -615,72 +632,94 @@
       <p class="options-sub">必要な機能だけ追加できます。組み合わせ自由です。</p>
     </div>
     <div class="options-grid">
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('page')">
         <div class="opt-icon">📄</div>
         <div class="opt-name">ページ追加</div>
         <div class="opt-price">+¥5,000<span>/ページ</span></div>
         <div class="opt-desc">会社概要・サービス・アクセスなど</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('form')">
         <div class="opt-icon">✉️</div>
         <div class="opt-name">お問い合わせフォーム</div>
         <div class="opt-price">+¥10,000</div>
         <div class="opt-desc">スパム対策・自動返信メール付き</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('blog')">
         <div class="opt-icon">📝</div>
         <div class="opt-name">ブログ・お知らせ機能</div>
         <div class="opt-price">+¥15,000</div>
         <div class="opt-desc">記事の投稿・カテゴリ管理</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('admin')">
         <div class="opt-icon">🖥️</div>
         <div class="opt-name">管理画面</div>
         <div class="opt-price">+¥20,000</div>
         <div class="opt-desc">ご自身でテキスト・画像を更新可能</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('instagram')">
         <div class="opt-icon">📸</div>
         <div class="opt-name">Instagram連携</div>
         <div class="opt-price">+¥10,000</div>
         <div class="opt-desc">最新投稿をサイトに自動表示</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('map')">
         <div class="opt-icon">🗺️</div>
         <div class="opt-name">Google Map埋め込み</div>
         <div class="opt-price">+¥5,000</div>
         <div class="opt-desc">アクセスページにマップを設置</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('hours')">
         <div class="opt-icon">🕐</div>
         <div class="opt-name">営業時間・定休日表示</div>
         <div class="opt-price">+¥5,000</div>
         <div class="opt-desc">本日の営業状況をリアルタイム表示</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('ga4')">
         <div class="opt-icon">📊</div>
         <div class="opt-name">アクセス解析設置</div>
         <div class="opt-price">+¥5,000</div>
         <div class="opt-desc">Google Analytics 4（GA4）導入</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('seo')">
         <div class="opt-icon">🔍</div>
         <div class="opt-name">SEO対策5点セット</div>
         <div class="opt-price">+¥15,000</div>
         <div class="opt-desc">構造化データ・GBP登録・速度改善など</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('shop')">
         <div class="opt-icon">🛒</div>
         <div class="opt-name">ネットショップ連携</div>
         <div class="opt-price">+¥20,000</div>
         <div class="opt-desc">BASE・STORESとの連携設置</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
-      <div class="opt-card">
+      <div class="opt-card" onclick="openModal('logo')">
         <div class="opt-icon">🎨</div>
         <div class="opt-name">ロゴ・バナー制作</div>
         <div class="opt-price">+¥15,000〜</div>
         <div class="opt-desc">シンプルなロゴデザインを制作</div>
+        <div class="opt-more">詳細を見る ›</div>
       </div>
+    </div>
+  </div>
+
+  <!-- モーダル -->
+  <div id="optModal" class="opt-modal" onclick="if(event.target===this)closeModal()">
+    <div class="opt-modal-box">
+      <button class="opt-modal-close" onclick="closeModal()">✕</button>
+      <div class="opt-modal-icon" id="modalIcon"></div>
+      <div class="opt-modal-name" id="modalName"></div>
+      <div class="opt-modal-price" id="modalPrice"></div>
+      <div class="opt-modal-body" id="modalBody"></div>
     </div>
   </div>
 
@@ -810,6 +849,162 @@
     btn.style.background = '#40c057';
     setTimeout(() => { btn.textContent = '送信する →'; btn.style.background = ''; e.target.reset(); }, 3000);
   }
+
+  // オプションモーダル
+  const modalData = {
+    page: {
+      icon: '📄', name: 'ページ追加', price: '+¥5,000 / ページ',
+      body: `<span class="opt-modal-tag">静的ページ</span>
+<p>トップページに加えて、必要なページを1ページ単位で追加できます。</p>
+<ul>
+  <li>会社概要・スタッフ紹介ページ</li>
+  <li>サービス・料金ページ</li>
+  <li>アクセス・地図ページ</li>
+  <li>よくある質問（FAQ）ページ</li>
+  <li>プライバシーポリシー・特商法ページ</li>
+</ul>
+<p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ 基本料金に含まれる3ページを超える場合に適用されます。</p>`
+    },
+    form: {
+      icon: '✉️', name: 'お問い合わせフォーム', price: '+¥10,000',
+      body: `<span class="opt-modal-tag">PHP / メール送信</span>
+<p>お客様からの問い合わせをメールで受け取れるフォームを設置します。</p>
+<ul>
+  <li>スパムBot対策（ハニーポット機能）付き</li>
+  <li>送信後の自動返信メール設定</li>
+  <li>入力内容の確認画面あり</li>
+  <li>必須項目バリデーション</li>
+  <li>スマートフォンでも使いやすいデザイン</li>
+</ul>`
+    },
+    blog: {
+      icon: '📝', name: 'ブログ・お知らせ機能', price: '+¥15,000',
+      body: `<span class="opt-modal-tag">MySQL / PHP</span>
+<p>新着情報やブログ記事を定期的に更新できる機能を追加します。</p>
+<ul>
+  <li>記事の投稿・編集・削除</li>
+  <li>カテゴリ分類・タグ管理</li>
+  <li>画像アップロード対応</li>
+  <li>記事一覧・詳細ページ自動生成</li>
+  <li>管理画面オプションとの組み合わせで自分で更新可能</li>
+</ul>`
+    },
+    admin: {
+      icon: '🖥️', name: '管理画面', price: '+¥20,000',
+      body: `<span class="opt-modal-tag">完全オリジナル</span>
+<p>コードの知識がなくても、ご自身でサイトの内容を更新できる専用管理画面を制作します。</p>
+<ul>
+  <li>テキスト・画像の差し替え</li>
+  <li>商品・サービス情報の更新</li>
+  <li>ブログ・お知らせの投稿管理</li>
+  <li>お店に合わせた必要最低限のシンプルな画面設計</li>
+  <li>ログイン認証付きで安全に管理</li>
+</ul>
+<p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ WordPressとは異なり、お店専用にゼロから設計するため使いやすさが格別です。</p>`
+    },
+    instagram: {
+      icon: '📸', name: 'Instagram連携', price: '+¥10,000',
+      body: `<span class="opt-modal-tag">Instagram Graph API</span>
+<p>Instagramに投稿した写真を、サイト上に自動で表示する機能を設置します。</p>
+<ul>
+  <li>最新投稿を自動でサイトに反映</li>
+  <li>投稿するだけでサイトも更新される</li>
+  <li>グリッド形式でおしゃれに表示</li>
+  <li>クリックでInstagramへ誘導</li>
+</ul>
+<p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ Instagramのビジネスアカウント・Facebookページが必要です。</p>`
+    },
+    map: {
+      icon: '🗺️', name: 'Google Map埋め込み', price: '+¥5,000',
+      body: `<span class="opt-modal-tag">Google Maps API</span>
+<p>アクセスページにインタラクティブなGoogleマップを埋め込みます。</p>
+<ul>
+  <li>お店・会社の場所をマップで表示</li>
+  <li>スマートフォンからルート検索が可能</li>
+  <li>ズームイン・アウト操作対応</li>
+  <li>サイトのデザインに合わせたスタイリング</li>
+</ul>`
+    },
+    hours: {
+      icon: '🕐', name: '営業時間・定休日表示', price: '+¥5,000',
+      body: `<span class="opt-modal-tag">リアルタイム表示</span>
+<p>現在の時刻に基づいて「営業中」「本日定休日」などをリアルタイムで表示します。</p>
+<ul>
+  <li>「只今営業中」「本日は定休日」を自動表示</li>
+  <li>曜日・時間帯で細かく設定可能</li>
+  <li>祝日・臨時休業の設定も対応</li>
+  <li>訪問者がすぐに営業状況を把握できる</li>
+</ul>`
+    },
+    ga4: {
+      icon: '📊', name: 'アクセス解析設置', price: '+¥5,000',
+      body: `<span class="opt-modal-tag">Google Analytics 4</span>
+<p>Googleが提供する無料のアクセス解析ツール（GA4）を設置します。</p>
+<ul>
+  <li>1日・月間のアクセス数を把握</li>
+  <li>どこから来たか（検索・SNS・直接）を確認</li>
+  <li>よく見られているページを分析</li>
+  <li>スマホ・PCの比率を確認</li>
+  <li>訪問者の地域・年齢層の分析</li>
+</ul>
+<p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ Googleアカウントが必要です。設置後の操作方法もご説明します。</p>`
+    },
+    seo: {
+      icon: '🔍', name: 'SEO対策5点セット', price: '+¥15,000',
+      body: `<span class="opt-modal-tag">検索上位対策</span>
+<p>Googleに評価されやすいサイトにするための対策を5点セットで実施します。</p>
+<ul>
+  <li>① metaタグ最適化（title・description）</li>
+  <li>② 構造化データ設置（Schema.org）</li>
+  <li>③ 見出し・キーワード配置設計</li>
+  <li>④ Googleビジネスプロフィール登録サポート</li>
+  <li>⑤ 表示速度改善（画像圧縮・キャッシュ設定）</li>
+</ul>
+<p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ 検索順位の保証はできませんが、基盤となる対策をしっかり行います。</p>`
+    },
+    shop: {
+      icon: '🛒', name: 'ネットショップ連携', price: '+¥20,000',
+      body: `<span class="opt-modal-tag">BASE / STORES</span>
+<p>既存のサイトにネットショップ機能を追加します。決済はBASE・STORESの安全な仕組みを利用します。</p>
+<ul>
+  <li>BASEまたはSTORESのショップを開設サポート</li>
+  <li>商品ページをサイトに組み込み・リンク設置</li>
+  <li>決済・在庫管理はBASE/STORESが担当</li>
+  <li>クレジットカード・PayPayなど主要決済に対応</li>
+</ul>
+<p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ BASE/STORESの手数料（売上の3〜6%）は別途発生します。</p>`
+    },
+    logo: {
+      icon: '🎨', name: 'ロゴ・バナー制作', price: '+¥15,000〜',
+      body: `<span class="opt-modal-tag">デザイン制作</span>
+<p>お店・会社のロゴやサイト用バナーをデザインします。</p>
+<ul>
+  <li>シンプルなロゴデザイン（修正2回まで）</li>
+  <li>PNG・SVG形式で納品</li>
+  <li>ヘッダーロゴ・ファビコン用サイズも作成</li>
+  <li>バナー制作（SNS用・サイト用）も対応</li>
+</ul>
+<p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ 複雑なデザインや修正が多い場合は別途お見積りになります。</p>`
+    }
+  };
+
+  function openModal(key) {
+    const d = modalData[key];
+    if (!d) return;
+    document.getElementById('modalIcon').textContent = d.icon;
+    document.getElementById('modalName').textContent = d.name;
+    document.getElementById('modalPrice').textContent = d.price;
+    document.getElementById('modalBody').innerHTML = d.body;
+    document.getElementById('optModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('optModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 </body>
 </html>
