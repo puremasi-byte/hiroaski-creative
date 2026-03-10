@@ -639,6 +639,13 @@
         <div class="opt-desc">会社概要・サービス・アクセスなど</div>
         <div class="opt-more">詳細を見る ›</div>
       </div>
+      <div class="opt-card" onclick="openModal('tab')">
+        <div class="opt-icon">🗂️</div>
+        <div class="opt-name">タブ・セクション追加</div>
+        <div class="opt-price">+¥8,000<span>/タブ</span></div>
+        <div class="opt-desc">商品・メニュー・ギャラリーなど</div>
+        <div class="opt-more">詳細を見る ›</div>
+      </div>
       <div class="opt-card" onclick="openModal('form')">
         <div class="opt-icon">✉️</div>
         <div class="opt-name">お問い合わせフォーム</div>
@@ -864,6 +871,19 @@
   <li>プライバシーポリシー・特商法ページ</li>
 </ul>
 <p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ 基本料金に含まれる3ページを超える場合に適用されます。</p>`
+    },
+    tab: {
+      icon: '🗂️', name: 'タブ・セクション追加', price: '+¥8,000 / タブ',
+      body: `<span class="opt-modal-tag">コンテンツ制作</span>
+<p>1ページ内でタブ切り替えにより複数のコンテンツを表示する機能を追加します。URLは変わらず、JavaScriptで表示を切り替えます。</p>
+<ul>
+  <li>商品・メニューのカテゴリ別タブ</li>
+  <li>ギャラリー・写真ギャラリータブ</li>
+  <li>ブログ・お知らせタブ</li>
+  <li>Instagram表示タブ</li>
+  <li>お問い合わせフォームタブ</li>
+</ul>
+<p style="margin-top:1rem;font-size:0.82rem;color:#868e96;">※ タブ内のコンテンツ量・複雑さによって別途お見積りになる場合があります。</p>`
     },
     form: {
       icon: '✉️', name: 'お問い合わせフォーム', price: '+¥10,000',
